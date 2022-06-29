@@ -1,8 +1,11 @@
 package prefinal;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
-public class Marcador extends ElementoFavorito{
+import condicion.Condicion;
+
+public class Marcador extends ElementoFavorito {
 	String titulo;
 	String url;
 	String usuario;
@@ -52,6 +55,51 @@ public class Marcador extends ElementoFavorito{
 		this.usuario = usuario;
 		this.palabras = new ArrayList<>();
 	}
+	
+	
+//es como una copia
+	@Override
+	public ElementoFavorito restringir(String palabra) {
+		if(this.getPalabras().contains(palabra)) {
+			Marcador copia = new Marcador(titulo, url, usuario);
+			for (int i = 0; i < palabras.size(); i++) {
+				copia.setPalabras(palabras.get(i));
+			}
+			return copia;
+		}
+		return null;
+	}
+
+	@Override
+	public int getCantidad() {
+		return 1;
+	}
+
+	@Override
+	public ArrayList<String> listarPalabrasClave() {
+		//como lo hizo el profesor
+		return new ArrayList<String>(palabras);		
+		
+		//ver si esta bien
+		//return this.getPalabras();
+		
+	}
+
+	@Override
+	public ArrayList<Marcador> buscar(Condicion c) {
+		ArrayList<Marcador> aux = new ArrayList<Marcador>();
+		if(c.cumple(this)) {
+			aux.add(this);
+		}
+		return aux;
+	}
+
+	public boolean contiene(String palabra) {
+		return palabras.contains(palabra);
+	}
+
+
+
 	
 	
 

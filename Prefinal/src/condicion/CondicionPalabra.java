@@ -8,7 +8,7 @@ public class CondicionPalabra extends Condicion {
 	@Override
 	public boolean cumple(Marcador m) {
 	
-		return m.getPalabras().contains(palabra);
+		return m.contiene(palabra);
 	}
 
 }
